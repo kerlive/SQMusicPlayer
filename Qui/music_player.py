@@ -21,6 +21,8 @@ class Main(base_1, form_1):
         
         self.player = QMediaPlayer()
 
+        self.setFixedSize(340,220)
+
         # Player control panel
 
         self.PlayButton.clicked.connect(self.media_play)
