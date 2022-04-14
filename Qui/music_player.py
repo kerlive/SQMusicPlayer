@@ -8,8 +8,9 @@ import os, sys
 import datetime
 
 from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, uic
+from PyQt5 import QtCore, QtGui, uic
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent, QMediaPlaylist
+
 
 ui_path = os.path.dirname(os.path.abspath(__file__))
 form_1, base_1 = uic.loadUiType(os.path.join(ui_path,"SQMP.ui"))
@@ -22,7 +23,7 @@ class Main(base_1, form_1):
         self.player = QMediaPlayer()
 
         self.setFixedSize(340,220)
-
+        self.setWindowIcon(QtGui.QIcon(':/Icon/Apricot_SQMP.ico'))
         # Player control panel
 
         self.PlayButton.clicked.connect(self.media_play)
@@ -107,7 +108,7 @@ class Main(base_1, form_1):
         self.listcontrolButton.setEnabled(True)
         self.loopButton.setEnabled(False)
 
-        self.player.play()
+        self.media_play()
     def list_control(self):
         match self.listloop:
             case 0:

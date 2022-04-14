@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="Icon">
+    <file>Apricot_SQMP.ico</file>
+  </qresource>
+</RCC>

@@ -227,6 +227,8 @@
    </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../UIresource.qrc"/>
+ </resources>
  <connections/>
 </ui>
