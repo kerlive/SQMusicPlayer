@@ -6,6 +6,19 @@ __license__ = "GPL-3.0"
 
 import os, sys
 import datetime
+from multiprocessing import shared_memory
+key = "SQMusicPlayer"
+instance = 1
+try:
+    single = shared_memory.SharedMemory(key, create=False)
+    single.buf[0] = 0
+except:
+    instance = 0
+if instance == 0:
+    single = shared_memory.SharedMemory(key, create=True,size=1)
+    single.buf[0] = 1
+else:
+    sys.exit("App is runing")
 
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui, uic
@@ -92,6 +105,10 @@ class Main(base_1, form_1):
 
         menu = QMenu()
         
+        
+        show = QAction("Pause",self)
+        show.triggered.connect(self.media_pause)
+        menu.addAction(show)
         show = QAction("Reload",self)
         show.triggered.connect(self.skip_backward)
         menu.addAction(show)
@@ -104,7 +121,17 @@ class Main(base_1, form_1):
         menu.addAction(quit)
 
         self.trayIcon.setContextMenu(menu)
-        
+
+        self.anotherCall()
+
+    def anotherCall(self):
+        cTimer = QtCore.QTimer(self)
+        cTimer.start(1000)
+        cTimer.timeout.connect(self.checkNew)
+    def checkNew(self):
+         if single.buf[0] == 0:
+             self.show()
+             single.buf[0] = 1
     
     def trayicon_quit(self):
         sys.exit(1)
