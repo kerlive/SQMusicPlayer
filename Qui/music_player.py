@@ -21,6 +21,8 @@ class Main(base_1, form_1):
         self.setupUi(self)
         
         self.player = QMediaPlayer()
+        #set can not minisize for trayicon
+        self.setWindowFlags(QtCore.Qt.Dialog)
 
         self.setFixedSize(340,220)
         self.setWindowIcon(QtGui.QIcon(':/Icon/Apricot_SQMP.ico'))
@@ -77,6 +79,40 @@ class Main(base_1, form_1):
         self.PlayButton.setEnabled(False)
         self.loopButton.setEnabled(False)
         self.listcontrolButton.setEnabled(False)
+
+        #QTrayIcon
+        QApplication.setQuitOnLastWindowClosed(False)
+
+        icon = QtGui.QIcon(":/Icon/Apricot_SQMP.ico")
+        self.trayIcon = QSystemTrayIcon()
+        self.trayIcon.setIcon(icon)
+        self.trayIcon.setVisible(True)
+
+        self.trayIcon.activated.connect(self.onTrayIconActivated)
+
+        menu = QMenu()
+        
+        show = QAction("Reload",self)
+        show.triggered.connect(self.skip_backward)
+        menu.addAction(show)
+        hide = QAction("Next",self)
+        hide.triggered.connect(self.skip_forward)
+        menu.addAction(hide)
+        
+        quit = QAction("Quit",self)
+        quit.triggered.connect(self.trayicon_quit)
+        menu.addAction(quit)
+
+        self.trayIcon.setContextMenu(menu)
+        
+    
+    def trayicon_quit(self):
+        sys.exit(1)
+    def onTrayIconActivated(self, reason):
+        if reason == QSystemTrayIcon.DoubleClick:
+            self.hide()
+        if reason == QSystemTrayIcon.Trigger:
+            self.show()
 
     def music_add(self):
         name = self.listWidget.currentItem().text()
