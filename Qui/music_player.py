@@ -35,9 +35,11 @@ class Main(base_1, form_1):
         
         self.player = QMediaPlayer()
         #set can not minisize for trayicon
-        self.setWindowFlags(QtCore.Qt.Dialog)
+        self.setWindowFlags(QtCore.Qt.Dialog|QtCore.Qt.WindowStaysOnTopHint)
+        self.setWhatsThis("Any you want to know in help.html")
 
-        self.setFixedSize(340,220)
+        self.setFixedSize(340,90)
+        self.sizecontrol = 0
         self.setWindowIcon(QtGui.QIcon(':/Icon/Apricot_SQMP.ico'))
         # Player control panel
 
@@ -57,6 +59,7 @@ class Main(base_1, form_1):
         self.skipbackwardButton.clicked.connect(self.skip_backward)
         self.skipforwardButton.clicked.connect(self.skip_forward)
         self.listcontrolButton.clicked.connect(self.list_control)
+        self.scrollButton.clicked.connect(self.scroll_plane)
 
         # loop signal
         self.loop = 0
@@ -72,6 +75,7 @@ class Main(base_1, form_1):
 
         # Set Button Icon to QtStandardIcon
 
+        self.scrollButton.setIcon(self.style().standardIcon(QStyle.SP_ArrowDown))
         self.PlayButton.setIcon(self.style().standardIcon(QStyle.SP_MediaPlay))
         self.muteButton.setIcon(self.style().standardIcon(QStyle.SP_MediaVolume))
         self.pauseButton.setIcon(self.style().standardIcon(QStyle.SP_MediaPause))
@@ -124,6 +128,16 @@ class Main(base_1, form_1):
 
         self.anotherCall()
 
+    def scroll_plane(self):
+        if self.sizecontrol == 0 :
+            self.sizecontrol = 1
+            self.setFixedSize(340,220)
+            self.scrollButton.setIcon(self.style().standardIcon(QStyle.SP_ArrowUp))
+        else:
+            self.sizecontrol = 0
+            self.setFixedSize(340,90)
+            self.scrollButton.setIcon(self.style().standardIcon(QStyle.SP_ArrowDown))
+        
     def anotherCall(self):
         cTimer = QtCore.QTimer(self)
         cTimer.start(1000)
@@ -308,3 +322,7 @@ class Main(base_1, form_1):
             self.time.stop()
             self.label_time.setText("00:00:00/00:00:00")
 
+    def event(self, event):
+        if event.type() == QtCore.QEvent.EnterWhatsThisMode:
+            QtGui.QDesktopServices.openUrl(QtCore.QUrl.fromLocalFile(os.getcwd()+"/Help/help.html"))
+        return super().event(event)
