@@ -3,6 +3,7 @@
 __author__ = "Kevin Chan"
 __copyright__ = "Copyright (C) 2022 Kevin Chan"
 __license__ = "GPL-3.0"
+__version__ = "0.1.0"
 
 import os, sys
 import datetime
