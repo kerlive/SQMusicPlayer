@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <style>
-  div.b2top {
+  div.bottonControl {
   position: fixed;
   bottom: 0;
   right: 0;
-  width: 200px;
+  width: 120px;
   border: 3px solid gray;
   border-radius: 5px;
 }
@@ -21,6 +21,18 @@
 .main {
     background-color:rgba(186, 133, 43, 0.05);
     border-radius: 15px;
+    height:100%;
+    width:80%;
+    float:left;
+}
+.content {
+  display: block;
+  height:100%;
+  width:200px;
+  float:left;
+  background-color:rgba(118, 33, 33, 0.25);
+  border-radius: 15px;
+  border: 5px solid orange;
 }
 .topic {
   overflow: hidden;
@@ -48,7 +60,7 @@
   </head>
 <html lang="en">
   <head>
-    <title>There is a Help doc</title>
+    <title>Here is a Help doc</title>
   </head>
   <body>
     <div class="topic">
@@ -62,8 +74,13 @@
     <p>version 0.1.0</p>
   </div>
   
+  <div id="MyContent" class="content">
+    <p>Here is content space</p>
+    <a href="#">Link1</a>
+    <a href="#">link2</a>
+  </div>
 
-  <div class="main">
+  <div id="MyMain" class="main">
 
     <p style="line-height: 100%; margin-bottom: 0cm">	<img src="help_html_c30040c20e0ef2e3.png" name="Image1" align="left" width="278" height="99">
       <br clear="left"/>
@@ -292,11 +309,27 @@
   <p style="line-height: 100%; margin-bottom: 0cm"><br/>
   </div>
 	
-  <div class="b2top">
-    <a href="#top">Back to top of page ----||</a>
+  <div class="bottonControl">
+    <button onClick="location.href='#Top'" type="button">Back to top of page</button>
+    <button id= "ShowButton" onclick="contrentControl()">Hide Content</button>
     </div>
   <script>
-	  !function(){
+function contrentControl() {
+var custDiv = document.getElementById("MyContent");
+var custDiv2 = document.getElementById("MyMain")
+if (custDiv.style.display === "none") {
+custDiv.style.display = "block";
+custDiv2.style.width = "80%";
+document.querySelector('#ShowButton').innerText = 'Hide Content';
+} 
+else{
+custDiv.style.display = "none";
+custDiv2.style.width = "100%";
+document.querySelector('#ShowButton').innerText = 'Show Content';
+}
+}
+
+!function(){
 function n(n,e,t){
 return n.getAttribute(e)||t
 }
