@@ -1,12 +1,47 @@
 <!DOCTYPE html>
 <style>
+  div.b2top {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 200px;
+  border: 3px solid gray;
+  border-radius: 5px;
+}
   .titleDiv {
-    border: 5px outset orange;
     background-image: linear-gradient(to right, tomato, chocolate, darkorange, yellow );    
     text-align: center;
+    padding: 80px;
+    border: 10px outset orange;
+    border-radius: 25px;
   }
   body {
   font-family: Arial, sans-serif;
+}
+.main {
+    background-color:rgba(186, 133, 43, 0.05);
+    border-radius: 15px;
+}
+.topic {
+  overflow: hidden;
+  background-color: #333;
+  border-radius: 5px;
+}
+
+/* Style the topic links */
+.topic a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change color on hover */
+.topic a:hover {
+  background-color: #ddd;
+  color: black;
 }
   </style>
   
@@ -16,6 +51,10 @@
     <title>There is a Help doc</title>
   </head>
   <body>
+    <div class="topic">
+      <a href="#">EN</a>
+      <a href="https://github.com/kerlive/SQMusicPlayer">About</a>
+    </div>
 
 	<p id="help">Here is SQMusic Help document.</p>
 	<div class="titleDiv">
@@ -24,7 +63,7 @@
   </div>
   
 
-  <div class="body">
+  <div class="main">
 
     <p style="line-height: 100%; margin-bottom: 0cm">	<img src="help_html_c30040c20e0ef2e3.png" name="Image1" align="left" width="278" height="99">
       <br clear="left"/>
@@ -248,9 +287,14 @@
     </p>
     <p style="line-height: 100%; margin-bottom: 0cm">Have enjoy the
     music.</p>
+  </p>
+  <p style="line-height: 100%; margin-bottom: 0cm"><br/></p>
+  <p style="line-height: 100%; margin-bottom: 0cm"><br/>
   </div>
 	
-
+  <div class="b2top">
+    <a href="#top">Back to top of page ----||</a>
+    </div>
   <script>
 	  !function(){
 function n(n,e,t){
