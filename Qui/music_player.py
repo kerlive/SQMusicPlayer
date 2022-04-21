@@ -25,9 +25,8 @@ from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui, uic
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent, QMediaPlaylist
 
-
 ui_path = os.path.dirname(os.path.abspath(__file__))
-form_1, base_1 = uic.loadUiType(os.path.join(ui_path,"SQMP.ui"))
+form_1, base_1 = uic.loadUiType(os.path.join(ui_path,"SQMusic.ui"))
 
 class Main(base_1, form_1):
     def __init__(self):

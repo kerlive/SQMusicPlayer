@@ -19,29 +19,43 @@
   font-family: Arial, sans-serif;
 }
 .main {
-    background-color:rgba(186, 133, 43, 0.05);
+    background: rgba(255, 255, 255, 0.75);
+    box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
     border-radius: 15px;
     height:100%;
     width:80%;
     float:left;
 }
+.main::before{
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 0; right: 0;
+    filter: blur(20px);
+    z-index: -1;
+    margin: -30px;
+}
 .content {
+  transform:translate(0,20px);
   display: block;
-  height:100%;
+  height:300px;
   width:200px;
   float:left;
-  background-color:rgba(118, 33, 33, 0.25);
+  background-color:rgba(255, 255, 255, 0.9);
   border-radius: 15px;
-  border: 5px solid orange;
+  border: 5px solid gray;
+  list-style-type: circle;
+  border-style: dotted solid dashed double;
 }
-.topic {
+.topicbar {
   overflow: hidden;
   background-color: #333;
   border-radius: 5px;
 }
 
-/* Style the topic links */
-.topic a {
+/* Style the topicbar links */
+.topicbar a {
   float: left;
   display: block;
   color: #f2f2f2;
@@ -51,7 +65,7 @@
 }
 
 /* Change color on hover */
-.topic a:hover {
+.topicbar a:hover {
   background-color: #ddd;
   color: black;
 }
@@ -63,21 +77,21 @@
     <title>Here is a Help doc</title>
   </head>
   <body>
-    <div class="topic">
+    <div class="topicbar">
       <a href="#">EN</a>
       <a href="https://github.com/kerlive/SQMusicPlayer">About</a>
     </div>
 
 	<p id="help">Here is SQMusic Help document.</p>
 	<div class="titleDiv">
-    <h2>SQMusic Help document</h2>
+    <h2>SQMusicPlayer Help document</h2>
     <p>version 0.1.0</p>
   </div>
   
   <div id="MyContent" class="content">
-    <p>Here is content space</p>
-    <a href="#">Link1</a>
-    <a href="#">link2</a>
+    <p>Table of Contents</p>
+    <li><a href="#add">Add music to list</a></li>
+    <li><a href="#loop">Play music in loop</a></li>
   </div>
 
   <div id="MyMain" class="main">
@@ -143,7 +157,7 @@
     f
     you are the first open this app , you need copy &ldquo;.mp3 or .wav&rdquo;
     music to Music folder.</p>
-    <p style="line-height: 100%; margin-bottom: 0cm">Or click adding
+    <p id=add style="line-height: 100%; margin-bottom: 0cm">Or click adding
     button to add music , the musc would be copy to Musicfolder.</p>
     <p style="line-height: 100%; margin-bottom: 0cm"><br/>
     
@@ -197,7 +211,7 @@
     <p style="line-height: 100%; margin-bottom: 0cm"><br/>
     
     </p>
-    <p style="line-height: 100%; margin-bottom: 0cm">W<img src="help_html_192d7131d9d44b89.png" name="Image6" align="left" width="346" height="247" border="0"/>
+    <p id=loop style="line-height: 100%; margin-bottom: 0cm">W<img src="help_html_192d7131d9d44b89.png" name="Image6" align="left" width="346" height="247" border="0"/>
     hen
     music playing,you can chosse loop the musc or cancel loop.</p>
     <p style="line-height: 100%; margin-bottom: 0cm"><br/>
