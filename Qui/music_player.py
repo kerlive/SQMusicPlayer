@@ -187,20 +187,20 @@ class Main(base_1, form_1):
 
         self.media_play()
     def list_control(self):
-        match self.listloop:
-            case 0:
-                self.listloop = 1
-                self.listcontrolButton.setIcon(self.style().standardIcon(QStyle.SP_TitleBarContextHelpButton))
-                self.soundtrack_list.setPlaybackMode(QMediaPlaylist.Sequential)
-            case 1:
-                self.listloop = 2
-                self.soundtrack_list.setPlaybackMode(QMediaPlaylist.Random)
-                self.listcontrolButton.setIcon(self.style().standardIcon(QStyle.SP_BrowserReload))
-            case 2:
-                self.listloop = 0
-                self.soundtrack_list.setPlaybackMode(QMediaPlaylist.Loop)
-                self.listcontrolButton.setIcon(self.style().standardIcon(QStyle.SP_ToolBarVerticalExtensionButton))
-    
+        listloop = self.listloop
+        if listloop == 0:
+            self.listloop = 1
+            self.listcontrolButton.setIcon(self.style().standardIcon(QStyle.SP_TitleBarContextHelpButton))
+            self.soundtrack_list.setPlaybackMode(QMediaPlaylist.Sequential)
+        if listloop == 2:
+            self.listloop = 2
+            self.soundtrack_list.setPlaybackMode(QMediaPlaylist.Random)
+            self.listcontrolButton.setIcon(self.style().standardIcon(QStyle.SP_BrowserReload))
+        if listloop == 0:
+            self.listloop = 0
+            self.soundtrack_list.setPlaybackMode(QMediaPlaylist.Loop)
+            self.listcontrolButton.setIcon(self.style().standardIcon(QStyle.SP_ToolBarVerticalExtensionButton))
+
     def loop_control(self):
         if self.loop == 0:
             self.loop = 1
@@ -233,18 +233,19 @@ class Main(base_1, form_1):
         self.horizontalSlider.setValue(position)
 
     def show_mediaState(self):
-        match self.player.state():
-            case 1:
-                self.setWindowTitle("Music Playing")
-            case 2:
-                self.setWindowTitle("Music Paused")
-            case 0:
-                self.setWindowTitle("Small Music Player")
-                self.horizontalSlider.setValue(0)
-                self.label_time.setText("00:00:00/00:00:00")
-                self.PlayButton.setText("Play")
-                self.PlayButton.setIcon(self.style().standardIcon(QStyle.SP_MediaPlay))
 
+        state = self.player.state()
+
+        if state == 1:
+            self.setWindowTitle("Music Playing")
+        if state == 2:
+            self.setWindowTitle("Music Paused")
+        if state == 0:
+            self.setWindowTitle("Small Music Player")
+            self.horizontalSlider.setValue(0)
+            self.label_time.setText("00:00:00/00:00:00")
+            self.PlayButton.setText("Play")
+            self.PlayButton.setIcon(self.style().standardIcon(QStyle.SP_MediaPlay))
 
     def music_del(self):
         if self.listWidget.currentRow() == -1:
